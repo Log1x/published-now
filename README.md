@@ -3,7 +3,7 @@
 ![Latest Stable Version](https://img.shields.io/packagist/v/log1x/published-now?style=flat-square)
 ![Total Downloads](https://img.shields.io/packagist/dt/log1x/published-now?style=flat-square)
 
-Published Now is a simple plugin to add a button to `Quick Edit` to change the publish date to the current date and time.
+A simple plugin adding a publish date reset button on the Classic Editor.
 
 ## Requirements
 

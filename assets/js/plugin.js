@@ -1,21 +1,33 @@
 import dayjs from 'dayjs';
 
 jQuery(document).ready(($) => {
-  if (!$('.inline-edit-date').length) {
+  const timestamp = $('.timestamp-wrap .save-timestamp');
+
+  if (!timestamp.length) {
     return;
   }
 
-  $('.inline-edit-date')
-    .find('.timestamp-wrap')
-    .append(
-      $('<a>')
-        .css({ display: 'inline-block', marginLeft: '0.25rem', cursor: 'pointer' })
-        .attr('data-refresh-date', true)
-        .html('<span class="dashicons dashicons-update"></span>')
-    );
+  timestamp.after(
+    $('<a>')
+      .css({
+        display: 'flex',
+        float: 'right',
+        minHeight: '28px',
+        cursor: 'pointer',
+        alignItems: 'center',
+        textDecoration: 'none',
+      })
+      .attr({
+        href: '#reset_timestamp',
+        class: 'reset-timestamp hide-if-no-js',
+      })
+      .html('<span class="dashicons dashicons-update"></span>')
+  );
 
-  $('[data-refresh-date]').bind('click', () => {
-    let time = dayjs();
+  $('.reset-timestamp').bind('click', (event) => {
+    event.preventDefault();
+
+    const time = dayjs();
 
     if ($('select[name="mm"]').length > 0) {
       $('select[name="mm"]').val(time.format('MM'));

@@ -3,14 +3,14 @@
 /**
  * Plugin Name: Published Now
  * Plugin URI:  https://github.com/log1x/published-now
- * Description: A simple plugin adding a "Now" button when editing a publish date.
- * Version:     1.0.0
+ * Description: Add a simple publish date reset button on the Classic Editor.
+ * Version:     1.0.1
  * Author:      Brandon Nifong
  * Author URI:  https://github.com/log1x
  * Licence:     MIT
  */
 
-add_action('init', new class
+add_filter('plugins_loaded', new class
 {
     /**
      * The plugin URI.
@@ -46,8 +46,12 @@ add_action('init', new class
      */
     public function enqueue()
     {
-        add_action('admin_enqueue_scripts', function ($hook) {
-            if ($hook !== 'edit.php') {
+        add_filter('admin_enqueue_scripts', function ($hook) {
+            if (! $this->contains($hook, [
+                'edit.php',
+                'post.php',
+                'post-new.php'
+            ])) {
                 return;
             }
 
@@ -69,5 +73,23 @@ add_action('init', new class
         $manifest = json_decode(file_get_contents($manifest), true);
 
         return $this->uri . ($manifest[$asset] ?? $asset);
+    }
+
+    /**
+     * Determine if a given string contains a given substring.
+     *
+     * @param  string  $haystack
+     * @param  string|string[]  $needles
+     * @return bool
+     */
+    public function contains($haystack, $needles)
+    {
+        foreach ((array) $needles as $needle) {
+            if ($needle !== '' && mb_strpos($haystack, $needle) !== false) {
+                return true;
+            }
+        }
+
+        return false;
     }
 });
