@@ -4,7 +4,7 @@
  * Plugin Name: Published Now
  * Plugin URI:  https://github.com/log1x/published-now
  * Description: Add a simple publish date reset button on the Classic Editor.
- * Version:     1.0.1
+ * Version:     1.0.2
  * Author:      Brandon Nifong
  * Author URI:  https://github.com/log1x
  * Licence:     MIT

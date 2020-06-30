@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 jQuery(document).ready(($) => {
-  const timestamp = $('.timestamp-wrap .save-timestamp');
+  const timestamp = $('#timestampdiv').find('.save-timestamp');
 
   if (!timestamp.length) {
     return;
